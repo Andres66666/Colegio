@@ -1,0 +1,60 @@
+<div class="container">
+  <h2>Registrar Materia</h2>
+  <form [formGroup]="materiaForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre_materia">Nombre de la Materia:</label>
+      <input
+        id="nombre_materia"
+        type="text"
+        class="form-control"
+        formControlName="nombre_materia"
+        required
+      />
+      <div
+        *ngIf="
+          materiaForm.get('nombre_materia')?.invalid &&
+          materiaForm.get('nombre_materia')?.touched
+        "
+        class="text-danger"
+      >
+        El nombre de la materia es obligatorio.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nivel">Nivel:</label>
+      <select id="nivel" class="form-select" formControlName="nivel" required>
+        <option value="">Seleccione un nivel</option>
+        <option *ngFor="let nivel of niveles" [value]="nivel.id_nivel">
+          {{ nivel.nombre_nivel }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          materiaForm.get('nivel')?.invalid && materiaForm.get('nivel')?.touched
+        "
+        class="text-danger"
+      >
+        Seleccionar un nivel es obligatorio.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!materiaForm.valid"
+    >
+      Registrar Materia
+    </button>
+  </form>
+
+  <!-- Mensaje de éxito -->
+  <div *ngIf="mensajeExito" class="alert alert-success mt-3">
+    {{ mensajeExito }}
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorModal" class="alert alert-danger mt-3">
+    {{ errorModal }}
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Editar Nivel</h2>
+
+  <form [formGroup]="nivelForm" (ngSubmit)="actualizarNivel()">
+    <div class="form-group">
+      <label for="nombre">Nombre del Nivel</label>
+      <input
+        type="text"
+        id="nombre_nivel"
+        class="form-control"
+        formControlName="nombre_nivel"
+        placeholder="Ingrese el nombre_nivel del nivel"
+      />
+      <div
+        *ngIf="
+          nivelForm.get('nombre_nivel')?.invalid &&
+          nivelForm.get('nombre_nivel')?.touched
+        "
+        class="text-danger"
+      >
+        El nombre es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="estado_niveles">Estado</label>
+      <select
+        id="estado_niveles"
+        class="form-control"
+        formControlName="estado_niveles"
+      >
+        <option [value]="true">Activo</option>
+        <option [value]="false">Inactivo</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar Nivel</button>
+  </form>
+  <div *ngIf="mensaje" class="alert alert-danger">
+    {{ mensaje }}
+  </div>
+
+  <div *ngIf="mensajeExito" class="alert alert-success">
+    {{ mensajeExito }}
+  </div>
+</div>

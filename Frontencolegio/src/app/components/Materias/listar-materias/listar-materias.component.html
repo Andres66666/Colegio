@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Lista de Materias</h2>
+
+  <button class="btn btn-success mb-3" (click)="registrarMateria()">
+    Registrar Nueva Materia
+  </button>
+
+  <div *ngIf="mensaje" class="alert alert-danger">
+    {{ mensaje }}
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead class="table table-striped table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Nombre de la Materia</th>
+        <th>Nivel</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let materia of materias">
+        <td>{{ materia.id_materia }}</td>
+        <td>{{ materia.nombre_materia }}</td>
+        <td>{{ materia.nivel.nombre_nivel }}</td>
+        <td>{{ materia.estado_materias }}</td>
+        <td>
+          <button
+            class="btn btn-primary"
+            (click)="editarMateria(materia.id_materia)"
+          >
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

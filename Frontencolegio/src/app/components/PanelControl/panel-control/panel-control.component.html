@@ -1,0 +1,289 @@
+<div class="d-flex flex-column min-vh-100">
+  <header class="bg-primary text-white text-center p-3">
+    <h1>Panel de Control</h1>
+  </header>
+
+  <div class="d-flex flex-grow-1">
+    <nav class="bg-light p-3" style="width: 250px">
+      <h4>Opciones</h4>
+      <div class="d-flex flex-column">
+        <ol class="list-group">
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerNivel')"
+          >
+            <i class="fas fa-list-alt mr-2"></i>
+            <span>Niveles</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerRoles')"
+          >
+            <i class="fas fa-list-alt mr-2"></i>
+            <span>Roles</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerMateria')"
+          >
+            <i class="fas fa-book mr-2"></i>
+            <span>Materias</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerMaestro')"
+          >
+            <i class="fas fa-chalkboard-teacher mr-2"></i>
+            <span>Maestros</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerEstudiante')"
+          >
+            <i class="fas fa-user-graduate mr-2"></i>
+            <span>Estudiantes</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerUsuario')"
+          >
+            <i class="fas fa-user mr-2"></i>
+            <span>Usuarios</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerCurso')"
+          >
+            <i class="fas fa-book-open mr-2"></i>
+            <span>Cursos</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerInscripcion')"
+          >
+            <i class="fas fa-clipboard-list mr-2"></i>
+            <span>Inscripciones</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerNota')"
+          >
+            <i class="fas fa-pencil-alt mr-2"></i>
+            <span>Notas</span>
+          </li>
+          <li
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            (click)="mostrarComponente('VerAsistencia')"
+          >
+            <i class="fas fa-calendar-check mr-2"></i>
+            <span>Asistencias</span>
+          </li>
+        </ol>
+      </div>
+    </nav>
+
+    <main class="flex-grow-1 p-3">
+      <ng-container *ngIf="componenteActual === 'VerNivel'">
+        <app-listar-niveles
+          (registrarNiveles)="onRegistrarNivel()"
+          (editarNiveles)="mostrarComponente('EditarNivel', $event)"
+        ></app-listar-niveles>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarNivel'">
+        <app-registrar-niveles
+          (listarNiveles)="mostrarComponente('VerNivel')"
+        ></app-registrar-niveles>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarNivel'">
+        <app-editar-niveles
+          [nivelesId]="nivelesIdParaEditar"
+          (listarNivelesEditado)="mostrarComponente('VerNivel')"
+        ></app-editar-niveles>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerRoles'">
+        <app-listar-roles
+          (registrarRoles)="onRegistrarRol()"
+          (editarRoles)="mostrarComponente('EditarRol', $event)"
+        ></app-listar-roles>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarRol'">
+        <app-registrar-roles
+          (listarRoles)="mostrarComponente('VerRoles')"
+        ></app-registrar-roles>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarRol'">
+        <app-editar-roles
+          [rolesId]="rolesIdParaEditar"
+          (listarRolesEditado)="mostrarComponente('VerRoles')"
+        ></app-editar-roles>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerMateria'">
+        <app-listar-materias
+          (registrarMaterias)="onRegistrarMateria()"
+          (editarMaterias)="mostrarComponente('EditarMateria', $event)"
+        ></app-listar-materias>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarMateria'">
+        <app-registrar-materias
+          (listarMaterias)="mostrarComponente('VerMateria')"
+        ></app-registrar-materias>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarMateria'">
+        <app-editar-materias
+          [materiaId]="materiasIdParaEditar"
+          (listarMateriasEditado)="mostrarComponente('VerMateria')"
+        ></app-editar-materias>
+      </ng-container>
+
+      <!--  <ng-container *ngIf="componenteActual === 'VerMaestro'">
+        <app-listar-maestros
+          (registrarMaestros)="onRegistrarMaestro()"
+          (editarMaestros)="mostrarComponente('EditarMaestro', $event)"
+        ></app-listar-maestros>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarMaestro'">
+        <app-registrar-maestros
+          (listarMaestros)="mostrarComponente('VerMaestro')"
+        ></app-registrar-maestros>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarMaestro'">
+        <app-editar-maestros
+          [maestrosId]="maestrosIdParaEditar"
+          (listarMaestrosEditado)="mostrarComponente('VerMaestro')"
+        ></app-editar-maestros>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerEstudiante'">
+        <app-listar-estudiantes
+          (registrarEstudiantes)="onRegistrarEstudiante()"
+          (editarEstudiantes)="mostrarComponente('EditarEstudiante', $event)"
+        ></app-listar-estudiantes>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarEstudiante'">
+        <app-registrar-estudiantes
+          (listarEstudiantes)="mostrarComponente('VerEstudiante')"
+        ></app-registrar-estudiantes>
+      </ng-container>
+      <ng-container *ngIf="componenteActual === 'EditarEstudiante'">
+        <app-editar-estudiantes
+          [estudiantesId]="estudiantesIdParaEditar"
+          (listarEstudiantesEditado)="mostrarComponente('VerEstudiante')"
+        ></app-editar-estudiantes>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerUsuario'">
+        <app-listar-usuarios
+          (registrarUsuarios)="onRegistrarUsuario()"
+          (editarUsuarios)="mostrarComponente('EditarUsuario', $event)"
+        ></app-listar-usuarios>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarUsuario'">
+        <app-registrar-usuarios
+          (listarUsuarios)="mostrarComponente('VerUsuario')"
+        ></app-registrar-usuarios>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarUsuario'">
+        <app-editar-usuarios
+          [usuariosId]="usuariosIdParaEditar"
+          (listarUsuariosEditado)="mostrarComponente('VerUsuario')"
+        ></app-editar-usuarios>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerCurso'">
+        <app-listar-cursos
+          (registrarCursos)="onRegistrarCurso()"
+          (editarCursos)="mostrarComponente('EditarCurso', $event)"
+        ></app-listar-cursos>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarCurso'">
+        <app-registrar-cursos
+          (listarCursos)="mostrarComponente('VerCurso')"
+        ></app-registrar-cursos>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarCurso'">
+        <app-editar-curos
+          [cursosId]="cursosIdParaEditar"
+          (listarCursosEditado)="mostrarComponente('VerCurso')"
+        ></app-editar-curos>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerInscripcion'">
+        <app-listar-inscripciones-cursos
+          (registrarInscripciones)="onRegistrarInscripcion()"
+          (editarInscripciones)="mostrarComponente('EditarInscripcion', $event)"
+        ></app-listar-inscripciones-cursos>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarInscripcion'">
+        <app-registrar-inscripciones-cursos
+          (listarInscripciones)="mostrarComponente('VerInscripcion')"
+        ></app-registrar-inscripciones-cursos>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarInscripcion'">
+        <app-editar-inscripciones-cursos
+          [inscripcionesCursosId]="inscripcionesCursosIdParaEditar"
+          (listarInscripcionesEditado)="mostrarComponente('VerInscripcion')"
+        ></app-editar-inscripciones-cursos>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerNota'">
+        <app-listar-notas
+          (registrarNotas)="onRegistrarNota()"
+          (editarNotas)="mostrarComponente('EditarNota', $event)"
+        ></app-listar-notas>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarNota'">
+        <app-registrar-notas
+          (listarNotas)="mostrarComponente('VerNota')"
+        ></app-registrar-notas>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'EditarNota'">
+        <app-editar-notas
+          [notasId]="notasIdParaEditar"
+          (listarNotasEditado)="mostrarComponente('VerNota')"
+        ></app-editar-notas>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'VerAsistencia'">
+        <app-listar-asistencia
+          (registrarAsistencias)="onRegistrarAsistencia()"
+          (editarAsistencias)="mostrarComponente('EditarAsistencia', $event)"
+        ></app-listar-asistencia>
+      </ng-container>
+
+      <ng-container *ngIf="componenteActual === 'RegistrarAsistencia'">
+        <app-registrar-asistencia
+          (listarAsistencias)="mostrarComponente('VerAsistencia')"
+        ></app-registrar-asistencia>
+      </ng-container>
+      <ng-container *ngIf="componenteActual === 'EditarAsistencia'">
+        <app-editar-asistencia
+          [asistenciasId]="asistenciasIdParaEditar"
+          (listarAsistenciasEditado)="mostrarComponente('VerAsistencia')"
+        ></app-editar-asistencia>
+      </ng-container> -->
+    </main>
+  </div>
+
+  <footer class="bg-primary text-white text-center p-3">
+    <p>&copy; 2023 Tu Empresa. Todos los derechos reservados.</p>
+  </footer>
+</div>

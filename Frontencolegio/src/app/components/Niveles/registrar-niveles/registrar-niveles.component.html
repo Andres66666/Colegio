@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Registrar Nivel</h2>
+  <form [formGroup]="nivelForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre">Nombre del Nivel</label>
+      <input
+        type="text"
+        id="nombre"
+        formControlName="nombre"
+        class="form-control"
+      />
+      <div
+        *ngIf="
+          nivelForm.get('nombre')?.invalid && nivelForm.get('nombre')?.touched
+        "
+        class="text-danger"
+      >
+        El nombre es requerido.
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="nivelForm.invalid"
+    >
+      Registrar
+    </button>
+  </form>
+
+  <!-- Mensaje de éxito -->
+  <div *ngIf="mensajeExito" class="alert alert-success mt-3">
+    {{ mensajeExito }}
+  </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="mensaje" class="alert alert-danger mt-3">
+    {{ mensaje }}
+  </div>
+</div>

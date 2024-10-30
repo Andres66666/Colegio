@@ -1,0 +1,61 @@
+<div class="container">
+  <h2>Editar Materia</h2>
+  <form [formGroup]="materiaform" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre_materia">Nombre de la Materia:</label>
+      <input
+        type="text"
+        id="nombre_materia"
+        formControlName="nombre_materia"
+        class="form-control"
+        placeholder="Ingrese el nombre de la materia"
+      />
+      <div
+        *ngIf="
+          materiaform.get('nombre_materia')?.invalid &&
+          (materiaform.get('nombre_materia')?.touched ||
+            materiaform.get('nombre_materia')?.dirty)
+        "
+        class="text-danger"
+      >
+        El nombre de la materia es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nivel">Nivel:</label>
+      <select id="nivel" formControlName="nivel" class="form-control">
+        <option value="" disabled>Seleccione un nivel</option>
+
+        <option *ngFor="let nivel of niveles" [value]="nivel.id_nivel">
+          {{ nivel.nombre_nivel }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          materiaform.get('nivel')?.invalid &&
+          (materiaform.get('nivel')?.touched || materiaform.get('nivel')?.dirty)
+        "
+        class="text-danger"
+      >
+        El nivel es requerido.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="materiaform.invalid"
+    >
+      Actualizar Materia
+    </button>
+  </form>
+
+  <div *ngIf="mensajeExito" class="alert alert-success mt-3">
+    {{ mensajeExito }}
+  </div>
+
+  <div *ngIf="mensaje" class="alert alert-danger mt-3">
+    {{ mensaje }}
+  </div>
+</div>
